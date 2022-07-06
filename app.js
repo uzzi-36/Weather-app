@@ -3,19 +3,20 @@ let imgdiv = document.querySelector(`.img_div`);
 
 let myFunction = () => {
 
+    const API_KEY = "cfdfc2c3d1c948f38f9145913220607";
+
     imgdiv.style.display = "block";
 
     let city = document.querySelector("#city").value;
-    axios.get(`https://api.weatherapi.com/v1/current.json?key=b52a1217af194e27bfa155504223006&q=${city}`)
-        .then(function (response) {
-            // handle success
-            const data = response.data;
+    fetch(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`)
+        .then(response => response.json())
+        .then(data => {
 
             console.log(data);
 
-            let icon = data.current.condition.icon;
-            icon.replace("/file// ");
-            document.getElementById("weather_icon").src = icon;
+            // let icon = data.current.condition.icon;
+            // icon.replace("/file// ");
+            // document.getElementById("weather_icon").src = icon;
             document.querySelector("#tempC").innerText = data.current.temp_c + "°C";
 
             document.querySelector("#tempF").innerText = data.current.temp_f + "°F";
@@ -41,7 +42,7 @@ let myFunction = () => {
             // myFunction ();  
 
         }
-    )
+        )
 
 
 
